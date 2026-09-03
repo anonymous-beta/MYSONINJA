@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>冥忍 MYSŌNINJA — War Room</title>
+    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: #0a0a0f;
+            color: #b8b8c8;
+            font-family: 'Courier New', monospace;
+            padding: 12px;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        .header {
+            border-bottom: 1px solid #2a1a3a;
+            padding-bottom: 8px;
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-shrink: 0;
+        }
+        .header h1 {
+            font-size: 18px;
+            color: #d4a0ff;
+            letter-spacing: 2px;
+        }
+        .header .sub {
+            font-size: 11px;
+            color: #555;
+        }
+        .status-dot {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #4a8;
+            margin-right: 6px;
+            animation: pulse 1.5s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+        .main {
+            display: grid;
+            grid-template-columns: 280px 1fr 280px;
+            gap: 10px;
+            flex: 1;
+            min-height: 0;
+        }
+        .panel {
+            background: #0d0d16;
+            border: 1px solid #1a1a2a;
+            border-radius: 6px;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        .panel h3 {
+            color: #b080e0;
+            font-size: 11px;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+            border-bottom: 1px solid #1a1a2a;
+            padding-bottom: 4px;
+            flex-shrink: 0;
+        }
+        .panel-content {
+            flex: 1;
+            overflow-y: auto;
+            font-size: 12px;
+        }
+        .panel-content::-webkit-scrollbar {
+            width: 4px;
+            background: transparent;
+        }
+        .panel-content::-webkit-scrollbar-thumb {
+            background: #2a2a4a;
+            border-radius: 4px;
+        }
+        .terminal {
+            background: #08080e;
+            border: 1px solid #1a1a2a;
+            border-radius: 4px;
+            padding: 8px;
+            font-size: 12px;
+            font-family: 'Courier New', monospace;
+            flex: 1;
+            overflow-y: auto;
+            min-height: 100px;
+            color: #7a7a9a;
+        }
+        .terminal .prompt {
+            color: #b080e0;
+        }
+        .terminal .highlight {
+            color: #4a8;
+        }
+        .terminal .error {
+            color: #c44;
+        }
+        .input-row {
+            display: flex;
+            gap: 6px;
+            margin-top: 6px;
+            flex-shrink: 0;
+        }
+        .input-row input, .input-row select {
+            background: #111120;
+            border: 1px solid #2a2a3a;
+            color: #c0c0d0;
+            padding: 5px 8px;
+            border-radius: 4px;
+            font-family: inherit;
+            font-size: 12px;
+            flex: 1;
+        }
+        .input-row input:focus, .input-row select:focus {
+            border-color: #6a4a9a;
+            outline: none;
+        }
+        .input-row button {
+            background: #2a1a4a;
+            border: 1px solid #4a2a6a;
+            color: #c0c0d0;
+            padding: 5px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 11px;
+            font-weight: bold;
+            font-family: inherit;
+            transition: background 0.2s;
+            flex-shrink: 0;
+        }
+        .input-row button:hover {
+            background: #3a2a5a;
+        }
+        .badge {
+            font-size: 10px;
+            padding: 1px 8px;
+            border-radius: 12px;
+            background: #1a1a2a;
+            color: #7a7a9a;
+            display: inline-block;
+        }
+        .badge.success { background: #0a2a1a; color: #4a8; }
+        .badge.warning { background: #2a2a0a; color: #ca8; }
+        .badge.danger { background: #2a0a0a; color: #c44; }
+        .grid-2col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6px;
+        }
+        .stat-item {
+            background: #0a0a12;
+            padding: 4px 8px;
+            border-radius: 4px;
+            border: 1px solid #12121e;
+            font-size: 11px;
+        }
+        .stat-item span {
+            color: #d4a0ff;
+            font-weight: bold;
+        }
+        .target-entry {
+            padding: 3px 0;
+            border-bottom: 1px solid #0a0a12;
+            display: flex;
+            justify-content: space-between;
+            font-size: 11px;
+        }
+        .target-entry .type {
+            color: #666;
+        }
+        .target-entry .value {
+            color: #b8b8c8;
+        }
+        @media (max-width: 900px) {
+            .main {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto auto auto;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <div>
+        <h1>⚔️ 冥忍 MYSŌNINJA</h1>
+        <div class="sub"><span class="status-dot"></span> STANDALONE ARSENAL — v4.0</div>
+    </div>
+    <div style="font-size:11px; color:#555;">
+        <span id="sessionsCount">0</span> sessions · <span id="statsTime">—</span>
+    </div>
+</div>
+
+<div class="main">
+    <!-- LEFT PANEL: Targets + Payloads -->
+    <div class="panel">
+        <h3>🎯 TARGETS</h3>
+        <div class="panel-content">
+            <div class="input-row" style="margin-bottom:4px;">
+                <select id="targetType" style="flex:0.4;">
+                    <option value="ip">IP</option>
+                    <option value="domain">Domain</option>
+                    <option value="email">Email</option>
+                </select>
+                <input id="targetValue" placeholder="target" style="flex:1;">
+            </div>
+            <div class="input-row">
+                <button onclick="addTarget()">+ ADD</button>
+                <button onclick="refreshTargets()">⟳</button>
+            </div>
+            <div id="targetList" style="margin-top:6px;"></div>
+        </div>
+        
+        <h3 style="margin-top:8px;">💀 PAYLOAD GEN</h3>
+        <div class="panel-content">
+            <div class="input-row">
+                <input id="payloadHost" placeholder="C2 host" value="127.0.0.1">
+                <input id="payloadPort" placeholder="port" value="4444" style="flex:0.5;">
+            </div>
+            <button onclick="generatePayloads()" style="width:100%;">⚡ GENERATE SHELLS</button>
+            <div id="payloadOutput" class="terminal" style="min-height:60px; margin-top:4px; font-size:10px;"></div>
+        </div>
+    </div>
+
+    <!-- CENTER: Terminal -->
+    <div class="panel" style="flex:1;">
+        <h3>🖥️ WAR ROOM TERMINAL</h3>
+        <div class="terminal" id="terminal" style="flex:1;">
+            <div><span class="prompt">> </span>MYSŌNINJA v4.0 ready</div>
+            <div><span class="prompt">> </span>Kill chain active</div>
+            <div><span class="prompt">> </span>Type commands or use the panels</div>
+        </div>
+        <div class="input-row">
+            <input id="cmdInput" placeholder="enter command..." onkeydown="if(event.key==='Enter') execCommand();">
+            <button onclick="execCommand()">⏎</button>
+        </div>
+    </div>
+
+    <!-- RIGHT PANEL: C2 + Wireless + Stats -->
+    <div class="panel">
+        <h3>📡 C2 LISTENER</h3>
+        <div class="panel-content">
+            <div class="input-row">
+                <input id="c2Port" placeholder="port" value="4444" style="flex:0.6;">
+                <button onclick="startC2()" id="c2StartBtn">START</button>
+                <button onclick="stopC2()" id="c2StopBtn" style="display:none;">STOP</button>
+            </div>
+            <div id="c2Status" style="font-size:11px; color:#555; margin:4px 0;">not started</div>
+            <div id="c2Sessions" style="font-size:11px;"></div>
+        </div>
+        
+        <h3 style="margin-top:8px;">📶 WIRELESS</h3>
+        <div class="panel-content">
+            <div class="input-row">
+                <select id="wifiIface" style="flex:1;">
+                    <option value="">select</option>
+                </select>
+                <button onclick="scanWifi()">SCAN</button>
+            </div>
+            <div id="wifiResults" style="font-size:10px; color:#666;"></div>
+        </div>
+
+        <h3 style="margin-top:8px;">📊 STATS</h3>
+        <div class="panel-content">
+            <div class="grid-2col">
+                <div class="stat-item">Targets: <span id="statTargets">0</span></div>
+                <div class="stat-item">Campaigns: <span id="statCampaigns">0</span></div>
+                <div class="stat-item">Sessions: <span id="statSessions">0</span></div>
+                <div class="stat-item">AI Level: <span id="statAI">1.0</span></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // ===== SOCKET =====
+    const socket = io();
+    socket.on('connect', () => {
+        logTerminal('🔗 connected to war room');
+    });
+    socket.on('command_result', (data) => {
+        logTerminal(`📤 ${data.cmd}\n${data.output}`);
+    });
+    socket.on('capture', (data) => {
+        logTerminal(`🎣 capture: ${data.ip} → ${JSON.stringify(data.data)}`);
+    });
+    socket.on('c2_status', (data) => {
+        logTerminal(`📡 C2 ${data.status} on port ${data.port || '?'}`);
+        document.getElementById('c2StartBtn').style.display = data.status === 'started' ? 'none' : 'inline-block';
+        document.getElementById('c2StopBtn').style.display = data.status === 'started' ? 'inline-block' : 'none';
+        document.getElementById('c2Status').textContent = data.status === 'started' ? '✅ listening on ' + data.port : '⏹ stopped';
+    });
+    socket.on('scan_started', (data) => {
+        logTerminal(`🔍 scan started: ${data.target} (${data.scan_id})`);
+    });
+
+    // ===== TERMINAL =====
+    function logTerminal(msg) {
+        const el = document.getElementById('terminal');
+        const line = document.createElement('div');
+        line.innerHTML = '<span class="prompt">> </span>' + msg;
+        el.appendChild(line);
+        el.scrollTop = el.scrollHeight;
+    }
+
+    function execCommand() {
+        const input = document.getElementById('cmdInput');
+        const cmd = input.value.trim();
+        if (!cmd) return;
+        logTerminal(`$ ${cmd}`);
+        socket.emit('command', {cmd});
+        input.value = '';
+    }
+
+    // ===== TARGETS =====
+    function refreshTargets() {
+        fetch('/api/targets').then(r => r.json()).then(data => {
+            const el = document.getElementById('targetList');
+            if (!data || data.length === 0) {
+                el.innerHTML = '<div style="color:#444;font-size:11px;">no targets</div>';
+                return;
+            }
+            el.innerHTML = data.map(t => 
+                `<div class="target-entry"><span class="type">${t.type}</span><span class="value">${t.value}</span></div>`
+            ).join('');
+        });
+    }
+
+    function addTarget() {
+        const type = document.getElementById('targetType').value;
+        const value = document.getElementById('targetValue').value.trim();
+        if (!value) return;
+        fetch('/api/targets', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({type, value})
+        }).then(() => {
+            document.getElementById('targetValue').value = '';
+            refreshTargets();
+            refreshStats();
+            logTerminal(`🎯 target added: ${value}`);
+        });
+    }
+
+    // ===== PAYLOADS =====
+    function generatePayloads() {
+        const host = document.getElementById('payloadHost').value;
+        const port = document.getElementById('payloadPort').value;
+        const el = document.getElementById('payloadOutput');
+        el.innerHTML = '<div style="color:#666;">generating...</div>';
+        fetch('/api/payloads/reverse_shell', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({host, port})
+        }).then(r => r.json()).then(data => {
+            el.innerHTML = '';
+            for (const [k, v] of Object.entries(data)) {
+                const div = document.createElement('div');
+                div.style.marginBottom = '4px';
+                div.innerHTML = `<span style="color:#b080e0;">${k}</span> <span style="color:#666;font-size:9px;">${v.slice(0, 60)}${v.length > 60 ? '...' : ''}</span>`;
+                div.title = v;
+                div.style.cursor = 'pointer';
+                div.onclick = () => {
+                    navigator.clipboard.writeText(v);
+                    logTerminal(`📋 copied ${k} to clipboard`);
+                };
+                el.appendChild(div);
+            }
+            logTerminal(`💀 ${Object.keys(data).length} payloads generated`);
+        });
+    }
+
+    // ===== C2 =====
+    function startC2() {
+        const port = document.getElementById('c2Port').value;
+        fetch('/api/c2/start', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({port: parseInt(port)})
+        }).then(r => r.json()).then(data => {
+            logTerminal(`📡 C2 started on port ${port}`);
+            refreshC2Sessions();
+        });
+    }
+
+    function stopC2() {
+        fetch('/api/c2/stop', {method: 'POST'}).then(() => {
+            logTerminal('⏹ C2 stopped');
+        });
+    }
+
+    function refreshC2Sessions() {
+        fetch('/api/c2/sessions').then(r => r.json()).then(data => {
+            document.getElementById('c2Sessions').innerHTML = data.sessions.map(s => 
+                `<div style="font-size:10px;color:#4a8;">● ${s}</div>`
+            ).join('') || '<div style="color:#444;font-size:10px;">no sessions</div>';
+            document.getElementById('sessionsCount').textContent = data.count;
+            document.getElementById('statSessions').textContent = data.count;
+        });
+    }
+
+    // ===== WIRELESS =====
+    function loadWifiInterfaces() {
+        fetch('/api/wireless/interfaces').then(r => r.json()).then(data => {
+            const sel = document.getElementById('wifiIface');
+            sel.innerHTML = '<option value="">select</option>';
+            (data.interfaces || []).forEach(iface => {
+                sel.innerHTML += `<option value="${iface}">${iface}</option>`;
+            });
+        });
+    }
+
+    function scanWifi() {
+        const iface = document.getElementById('wifiIface').value;
+        if (!iface) return;
+        const el = document.getElementById('wifiResults');
+        el.innerHTML = 'scanning...';
+        fetch('/api/wireless/scan', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({interface: iface})
+        }).then(r => r.json()).then(data => {
+            const nets = data.networks || [];
+            el.innerHTML = nets.map(n => 
+                `<div>${n.essid || 'hidden'} — ch${n.channel} ${n.bssid}</div>`
+            ).join('') || '<div style="color:#444;">no networks found</div>';
+            logTerminal(`📶 found ${nets.length} networks`);
+        });
+    }
+
+    // ===== STATS =====
+    function refreshStats() {
+        fetch('/api/stats').then(r => r.json()).then(data => {
+            document.getElementById('statTargets').textContent = data.total_targets || 0;
+            document.getElementById('statCampaigns').textContent = data.active_campaigns || 0;
+            document.getElementById('statAI').textContent = data.ai_level || '1.0';
+            document.getElementById('statsTime').textContent = new Date().toLocaleTimeString();
+        });
+        refreshC2Sessions();
+    }
+
+    // ===== INIT =====
+    refreshTargets();
+    refreshStats();
+    loadWifiInterfaces();
+    setInterval(refreshStats, 5000);
+    logTerminal('⚔️ MYSŌNINJA v4.0 — standalone arsenal');
+    logTerminal('💀 type "help" for commands');
+</script>
+
+</body>
+      </html>
