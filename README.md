@@ -227,7 +227,7 @@ The creators are not responsible for misuse. Use responsibly.
 MYSŌNINJA was forged by:
 
 · MysteryAK — AI & Quantum Computing Specialist
-· Knightdale (Umenyi Bryan) — Red Team Operations Expert
+· (Anonymous-beta) — Red Team Operations Expert
 
 ---
 
