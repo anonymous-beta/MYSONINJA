@@ -1,0 +1,17 @@
+flask==2.3.3
+flask-socketio==5.3.4
+python-socketio==5.9.0
+requests==2.31.0
+beautifulsoup4==4.12.2
+python-nmap==0.7.1
+sqlalchemy==2.0.23
+cryptography==41.0.7
+paramiko==3.4.0
+dnspython==2.4.2
+shodan==1.30.0
+pysmb==1.2.10
+impacket==0.11.0
+pycryptodome==3.19.0
+dnsrecon==1.1.1
+theHarvester==4.5.0
+hashcat==0.0.1
