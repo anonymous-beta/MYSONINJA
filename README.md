@@ -9,7 +9,7 @@
 <p align="center">
   <!-- LANDSCAPE LOGO SPACE — 800x200 -->
   <!-- Replace the URL below with your logo image -->
-  <img src="https://via.placeholder.com/800x200/0a0a12/7a4a9a?text=⚔️+MYSŌNINJA+⚔️" alt="MYSŌNINJA Logo" width="800">
+  <img src="logo.png" alt="MYSŌNINJA Logo" width="800">
 </p>
 
 <p align="center">
