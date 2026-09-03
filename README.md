@@ -1,146 +1,246 @@
-
-# 🗡️ MYSŌNINJA ULTIMATE💀😈
-<p align="center">
-  
-```
-
-
-
-███╗   ███╗██╗   ██╗███████╗ ██████╗ ███╗   ██╗██╗███╗   ██╗ █████╗ ██╗   ██╗
-
-████╗ ████║╚██╗ ██╔╝██╔════╝██╔═══██╗████╗  ██║██║████╗  ██║██╔══██╗╚██╗ ██╔╝
-
-██╔████╔██║ ╚████╔╝ ███████╗██║   ██║██╔██╗ ██║██║██╔██╗ ██║███████║ ╚████╔╝
-
-██║╚██╔╝██║  ╚██╔╝  ╚════██║██║   ██║██║╚██╗██║██║██║╚██╗██║██╔══██║  ╚██╔╝
-
-██║ ╚═╝ ██║   ██║   ███████║╚██████╔╝██║ ╚████║██║██║ ╚████║██║  ██║   ██║
-
-╚═╝     ╚═╝   ╚═╝   ╚══════╝ ╚═════╝ ╚═╝  ╚═══╝╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝   ╚═╝
-
-
-
-🗡️ QUANTUM RED TEAM WARFARE PLATFORM • DEMON SLAYER EDITION 🗡️
-
-FORGED BY MYSTERYAK & KNIGHTDALE • WHERE DEMONS FEAR TO TREAD 🥶
-
-
-
-```
-<div align="center">
-<div align="center">
-
-# <img src="https://img.icons8.com/fluency/48/000000/ninja.png" width="30"> 冥忍 MYSŌNINJA <img src="https://img.icons8.com/fluency/48/000000/ninja.png" width="30">
-
-## `QUANTUM RED TEAM WARFARE PLATFORM` ⚡
-
-> *"Forged by MysteryAK & Knightdale • Where Demons Fear to Tread"* 🥶
-
-![Version](https://img.shields.io/badge/DEMON_SLAYER-EDITION-ff0033?style=for-the-badge&logo=ghost&logoColor=white)
-![Python](https://img.shields.io/badge/PYTHON-3.8+-00ffff?style=for-the-badge&logo=python&logoColor=white)
-![Platform](https://img.shields.io/badge/PLATFORM-LINUX|WINDOWS|MACOS-8a2be2?style=for-the-badge)
+<!-- 
+  ═══════════════════════════════════════════════════════════════
+  MYSŌNINJA — QUANTUM RED TEAM ARSENAL
+  ═══════════════════════════════════════════════════════════════
+  Place your logo here (recommended: 800x200 PNG or SVG)
+  ═══════════════════════════════════════════════════════════════
+-->
 
 <p align="center">
-  <img alt="Stars" src="https://img.shields.io/github/stars/mysteryak/mysoninja?style=for-the-badge&color=ff0033&label=DEMON%20SLAYERS">
-  <img alt="Forks" src="https://img.shields.io/github/forks/mysoninja?style=for-the-badge&color=00ff88&label=SHADOW%20CLONES">  
-  <img alt="License" src="https://img.shields.io/badge/LICENSE-MIT-ffcc00?style=for-the-badge">
+  <!-- LANDSCAPE LOGO SPACE — 800x200 -->
+  <!-- Replace the URL below with your logo image -->
+  <img src="https://via.placeholder.com/800x200/0a0a12/7a4a9a?text=⚔️+MYSŌNINJA+⚔️" alt="MYSŌNINJA Logo" width="800">
 </p>
 
-**🔥 THE ULTIMATE RED TEAM WARFARE PLATFORM 🔥**
+<p align="center">
+  <strong>🗡️ QUANTUM RED TEAM WARFARE PLATFORM — STANDALONE ARSENAL 🗡️</strong><br>
+  <em>"In the shadows we operate, with honor we compete."</em>
+</p>
 
-</div>
+<p align="center">
+  <img src="https://img.shields.io/badge/version-4.0.0-purple?style=flat-square&color=7a4a9a" alt="Version">
+  <img src="https://img.shields.io/badge/platform-linux%20%7C%20windows%20%7C%20termux-dark?style=flat-square&color=2a2a4a" alt="Platform">
+  <img src="https://img.shields.io/badge/license-MIT-light?style=flat-square&color=4a8" alt="License">
+  <img src="https://img.shields.io/badge/status-active-brightgreen?style=flat-square&color=4a8" alt="Status">
+</p>
 
-**Quantum Red Team Platform | AI-Powered Cyber Warfare Suite**
+---
 
-*Created by [MysteryAK](https://github.com/mysteriousak) & [Knightdale (Umenyi Bryan)](https://github.com/umenyi-bryan)*
+## 📡 OVERVIEW
 
-</div>
+**MYSŌNINJA** is a fully self-contained red team arsenal — no cloud, no API keys, no external dependencies. Every module is built to function offline, in the field, or behind enemy lines.
 
-## 🌟 Features
+It implements a complete **kill chain**:
 
-- **🤖 AI-Powered Automation** - Self-evolving attack strategies
-- **🌐 Web-Controlled Interface** - No terminal commands needed
-- **🎯 Target Management** - IPs, domains, emails through web UI
-- **💥 Network Attacks** - Nmap integration through browser
-- **🎣 AI Phishing Generator** - Multi-platform campaigns
-- **🔮 Quantum AI** - Strategic planning and evolution
-
-🔑 Ngrok Token Input:
-
-· Sidebar section for token management
-· Secure storage in localStorage
-· Automatic configuration when saved
-· Token validation and error handling
-
-🔗 Phishing Link Display:
-
-· Beautiful campaign cards with platform badges
-· Live public URLs that are clickable
-· Real-time statistics (visitors, credentials)
-· Automatic updates when ngrok tunnel starts
-
-🌐 Complete Workflow:
-
-1. Enter ngrok token in sidebar
-2. Generate phishing campaign
-3. See live public URL immediately
-4. Share the link with targets
-5. Monitor results in real-time
-
-Test it now:
-
-```bash
-python src/mysoninja_web_controlled.py
-# Access: http://127.0.0.1:5000
 ```
-## 🚀 Quick Start
+
+RECON → WEAPONIZE → DELIVER → EXPLOIT → PERSIST → C2 → EXFIL → COVER
+
+```
+
+Built for operators who need real capability without the bloat.
+
+---
+
+## ⚡ CORE FEATURES
+
+| Module | Capability |
+|--------|------------|
+| **🎯 Recon** | DNS enumeration, port scanning, subdomain discovery, service fingerprinting |
+| **💀 Payloads** | Reverse shells (bash, Python, PowerShell, CMD), obfuscated, multi-platform |
+| **⚡ Exploits** | EternalBlue (MS17-010), SMB relay, web vulnerabilities (SQLi, RCE, LFI) |
+| **🏴 Persistence** | Registry keys, scheduled tasks, services, WMI, startup folders |
+| **📡 C2** | Multi-session TCP listener with heartbeat, encrypted command channel |
+| **🎣 Phishing** | Dynamic page generator with tracking pixels, credential capture, real-time alerts |
+| **📶 Wireless** | WiFi scanning, deauth attacks, handshake capture, hashcat integration |
+| **🖥️ Terminal** | Full shell access directly from the War Room UI |
+| **🔐 Crypto** | AES-256, ChaCha20, XOR obfuscation for payloads and sessions |
+| **🌐 Web UI** | Real-time dashboard with SocketIO, terminal emulation, module controls |
+
+---
+
+## 🚀 QUICK START
+
+### Installation
 
 ```bash
-# Clone & Install
-git clone https://github.com/umenyi-bryan/MYSONINJA
+# Clone the repository
+git clone https://github.com/anonymous-beta/MYSONINJA
 cd MYSONINJA
-./install.sh
-python src/mysoninja_web_controlled.py
 
-# Access: http://127.0.0.1:5000
+# Run the installer (auto-detects Linux/Termux)
+chmod +x install.sh
+./install.sh
+
+# Launch the arsenal
+python3 run.py
 ```
 
-🏆 Competition Ready
+Access
 
-· Full kill chain implementation
-· 60-second deployment
-· Real-time monitoring
-· Professional reporting
+```
+🌐 War Room: http://127.0.0.1:5000
+🔑 Default port: 5000
+```
 
-📁 Project Structure
+---
+
+🧩 MODULE BREAKDOWN
+
+Reconnaissance
+
+```bash
+# DNS enumeration
+POST /api/recon/dns
+{ "domain": "target.com" }
+
+# Port scanning
+POST /api/recon/ports
+{ "host": "192.168.1.1" }
+
+# Subdomain discovery
+POST /api/recon/subdomain
+{ "domain": "target.com" }
+```
+
+Payload Generation
+
+```bash
+# Generate reverse shells (all platforms)
+POST /api/payloads/reverse_shell
+{ "host": "127.0.0.1", "port": 4444 }
+
+# Output: bash, python, powershell, cmd variants
+```
+
+Command & Control
+
+```bash
+# Start TCP listener
+POST /api/c2/start
+{ "host": "0.0.0.0", "port": 4444 }
+
+# Get active sessions
+GET /api/c2/sessions
+
+# Send command to session
+POST /api/c2/send
+{ "session_id": "...", "command": "whoami" }
+```
+
+Phishing Campaigns
+
+```bash
+# Generate campaign
+POST /api/campaigns
+{
+  "platform": "facebook|gmail|microsoft|paypal",
+  "target_email": "victim@example.com",
+  "message": "Custom alert text"
+}
+
+# Campaign URL
+http://127.0.0.1:5000/capture/{campaign_id}
+```
+
+Exploits
+
+```bash
+# Check EternalBlue vulnerability
+POST /api/exploit/eternalblue/check
+{ "host": "192.168.1.10" }
+
+# Add persistence (Windows)
+POST /api/persistence/registry
+{
+  "name": "update",
+  "command": "C:\\payload.exe",
+  "key": "HKCU"
+}
+```
+
+---
+
+🖥️ WAR ROOM UI
+
+The web interface provides a terminal-style command center with:
+
+· Real-time logging via SocketIO
+· Module panels for quick access
+· Session management for active C2 connections
+· Capture alerts when phishing credentials are submitted
+· Command execution directly from the browser
+
+https://via.placeholder.com/800x400/0a0a12/7a4a9a?text=War+Room+UI+Preview
+
+---
+
+🔧 REQUIREMENTS
+
+· Python 3.8+
+· Linux / Windows / Termux
+· Nmap (optional, for advanced scanning)
+· Aircrack-ng (optional, for wireless attacks)
+
+All Python dependencies are handled by install.sh.
+
+---
+
+📁 PROJECT STRUCTURE
 
 ```
 MYSONINJA/
 ├── src/
-│   ├── mysoninja_web_controlled.py  # Main application
-│   └── templates/dashboard.html     # Web interface
-├── install.sh                       # Installation script
-├── requirements.txt                 # Python dependencies
-└── README.md                        # Documentation
+│   ├── core/              # Engine, database, crypto, obfuscator
+│   ├── modules/           # Recon, payloads, exploits, persistence, C2, phishing, wireless
+│   ├── web/               # Flask app, routes, static assets
+│   ├── templates/         # War Room HTML
+│   └── utils/             # Banner, helpers
+├── data/                  # Encrypted SQLite database
+├── campaigns/             # Generated phishing pages
+├── logs/                  # Encrypted session logs
+├── requirements.txt
+├── install.sh
+├── run.py
+└── README.md
 ```
-
-👥 Creators
-
-· MysteryAK - AI & Quantum Computing Specialist
-· Knightdale (Umenyi Bryan) - Red Team Operations Expert
-
-📜 License
-
-MIT License - See LICENSE file for details.
 
 ---
 
-<div align="center">
+🛡️ SECURITY & ETHICS
 
-"In the shadows we operate, with honor we compete."
+MYSŌNINJA is designed for:
 
-– MysteryAK & Knightdale
+· Authorized penetration testing
+· Red team exercises
+· Security research and education
+· CTF competitions
 
-https://img.shields.io/badge/View%20on%20GitHub-MYSONINJA-black?style=for-the-badge&logo=github
+DO NOT use this tool on systems you do not own or have explicit permission to test.
 
-</div>
+The creators are not responsible for misuse. Use responsibly.
+
+---
+
+👥 CREDITS
+
+MYSŌNINJA was forged by:
+
+· MysteryAK — AI & Quantum Computing Specialist
+· Knightdale (Umenyi Bryan) — Red Team Operations Expert
+
+---
+
+📜 LICENSE
+
+MIT License — see LICENSE for details.
+
+---
+
+<p align="center">
+  <strong>⚔️ In the shadows we operate, with honor we compete. ⚔️</strong>
+</p>
+
+<p align="center">
+  <sub>MYSŌNINJA v4.0 — STANDALONE ARSENAL</sub>
+</p>
